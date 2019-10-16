@@ -1,0 +1,14 @@
+package com.control.situation.dao;
+
+import com.control.situation.entity.${table.className}Info;
+
+import java.util.List;
+
+/**
+ * 数据库层封装
+ *
+ * @author ${author}
+ * @since 1.0
+ */
+public interface ${table.className}Dao {
+}

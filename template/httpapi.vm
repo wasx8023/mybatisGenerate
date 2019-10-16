@@ -1,0 +1,62 @@
+package ${table.packageName}.http;
+
+import org.apache.log4j.Logger;
+
+import com.control.situation.utils.ClientResult;
+import com.control.situation.api.${table.className}Api;
+import com.control.situation.config.Env;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletRequest;
+
+/**
+ * ${table.className} 访问层
+ * @author ${author}
+ * @since 1.0
+ */
+@RestController
+@RequestMapping("/api/${table.classNameFirstLower}")
+public class ${table.className}HttpApi {
+
+	private Logger logger = Logger.getLogger(${table.className}HttpApi.class);
+
+	@Autowired
+	private ${table.className}Api ${table.classNameFirstLower}Api;
+
+	@RequestMapping("findList")
+	public ClientResult findList(HttpServletRequest req) {
+		Env env = (Env) req.getAttribute("env");
+		ClientResult clientResult = ${table.classNameFirstLower}Api.findList(env);
+		return clientResult;
+	}
+
+	@RequestMapping("findDetail")
+	public ClientResult findDetail(HttpServletRequest req){
+		Env env = (Env) req.getAttribute("env");
+		ClientResult clientResult = ${table.classNameFirstLower}Api.findDetail(env);
+		return clientResult;
+	}
+
+	@RequestMapping("save")
+	public ClientResult save(HttpServletRequest req){
+		Env env = (Env) req.getAttribute("env");
+		ClientResult clientResult = ${table.classNameFirstLower}Api.save(env);
+		return clientResult;
+	}
+
+	@RequestMapping("delete")
+	public ClientResult delete(HttpServletRequest req){
+		Env env = (Env) req.getAttribute("env");
+		ClientResult clientResult = ${table.classNameFirstLower}Api.delete(env);
+		return clientResult;
+	}
+
+	@RequestMapping("update")
+	public ClientResult update(HttpServletRequest req){
+		Env env = (Env) req.getAttribute("env");
+		ClientResult clientResult = ${table.classNameFirstLower}Api.update(env);
+		return clientResult;
+	}
+}

@@ -1,0 +1,51 @@
+package ${table.packageName}.mapper;
+
+import com.github.pagehelper.Page;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Mapper;
+
+import ${table.packageName}.model.query.${table.className}QueryDto;
+import ${table.packageName}.model.entity.${table.className};
+
+/**
+ * 数据库层
+ *
+ * @author:${author}
+ * @date:${datetime}
+ */
+@Mapper
+public interface ${table.className}Mapper {
+
+    /**
+     * 新增
+     *
+     * @param record
+     * @return
+     */
+    int insert(${table.className} record);
+
+    /**
+     * 修改
+     *
+     * @param record
+     * @return
+     */
+    int update(${table.className} record);
+
+    /**
+     * 根据ID查询
+     *
+     * @param id
+     * @return
+     */
+	${table.className} getById(Long id);
+
+    /**
+     * 列表查询，支持分页
+     *
+     * @param queryDto
+     * @return
+     */
+	Page<${table.className}> list(${table.className}QueryDto queryDto);
+
+}

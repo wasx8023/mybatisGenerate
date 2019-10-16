@@ -1,0 +1,35 @@
+##实体类代码
+package ${table.packageName}.model.entity;
+
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Date;
+
+/**
+ * ${table.className} 实体类
+ *
+ * @author ${author}
+ * @date:${datetime}
+ */
+@Getter
+@Setter
+@ToString(callSuper = true)
+@NoArgsConstructor
+@ApiModel("${table.tableComment} 实体类")
+public class ${table.className} extends BaseEntity {
+
+	private static final long serialVersionUID = -1L;
+
+#foreach( $tempColumn in $table.columnList)
+#if(${tempColumn.columnComment.trim()} != '')
+	@ApiModelProperty(value = "${tempColumn.columnComment.trim()}")
+#end
+	private ${tempColumn.fieldType} ${tempColumn.fieldName};
+
+#end
+}

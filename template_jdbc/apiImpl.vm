@@ -1,0 +1,32 @@
+package org.demon.module.${table.classNameFirstLower};
+
+import org.demon.module.${table.classNameFirstLower}.${table.className}DaoImpl;
+import org.demon.sdk.entity.${table.classNameFirstLower}.${table.className};
+import org.demon.sdk.environment.Env;
+import org.demon.sdk.exception.LogicalException;
+import org.demon.sdk.inner.I${table.className}Api;
+import org.demon.sdk.utils.RetCodeEnum;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
+import org.springframework.stereotype.Service;
+
+import org.apache.log4j.Logger;
+
+/**
+ * 业务逻辑处理类
+ *
+ * @author ${author}
+ * @since 1.0
+ */
+@Service
+public class ${table.className}Api implements I${table.className}Api {
+
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
+	@Autowired
+	private ApplicationContext applicationContext;
+	@Autowired
+	private ${table.className}DaoImpl ${table.classNameFirstLower}Dao;
+}

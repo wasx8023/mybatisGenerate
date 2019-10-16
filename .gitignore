@@ -1,0 +1,7 @@
+*.iml
+*.class
+
+/target/*
+/.idea
+/velocity.log*
+target

@@ -1,0 +1,48 @@
+package com.control.situation.api;
+
+import com.xubei.framework.common.entity.Pager;
+import com.xubei.framework.common.entity.ResponseObj;
+import org.springframework.cloud.netflix.feign.FeignClient;
+
+/**
+ * 内部模块访问接口
+ *
+ * @author:${author}
+ * @date:${datetime}
+ */
+@FeignClient(value = ServiceName.VALUE)
+public interface ${table.className}Api {
+
+    /**
+     * 新增
+     *
+     * @param ${table.classNameFirstLower}
+     * @return
+     */
+    ResponseObj save(${table.className} ${table.classNameFirstLower});
+
+    /**
+     * 修改
+     *
+     * @param ${table.classNameFirstLower}
+     * @return
+     */
+    ResponseObj update(${table.className} ${table.classNameFirstLower});
+
+    /**
+     * 根据ID查询
+     *
+     * @param id
+     * @return
+     */
+    ResponseObj<${table.className}> getById(Long id);
+
+    /**
+     * 查询列表
+     *
+     * @param queryDTO
+     * @return
+     */
+    ResponseObj<Pager<${table.className}>> page(${table.className}QueryDTO queryDTO);
+
+}

@@ -1,0 +1,57 @@
+package ${table.packageName}.service;
+
+import com.github.pagehelper.Page;
+import ${table.packageName}.model.query.${table.className}QueryDto;
+import ${table.packageName}.model.entity.${table.className};
+
+import java.util.List;
+
+/**
+ * 业务逻辑接口
+ *
+ * @author:${author}
+ * @date:${datetime}
+ */
+public interface ${table.className}Service {
+
+    /**
+     * 新增
+     *
+     * @param ${table.classNameFirstLower}
+     * @return
+     */
+    int insert(${table.className} ${table.classNameFirstLower});
+
+    /**
+     * 修改
+     *
+     * @param ${table.classNameFirstLower}
+     * @return
+     */
+    int update(${table.className} ${table.classNameFirstLower});
+
+    /**
+     * 根据ID查询
+     *
+     * @param id
+     * @return
+     */
+	${table.className} getById(Long id);
+
+    /**
+     * 列表查询
+     *
+     * @param id
+     * @return
+     */
+    List<${table.className}> list(${table.className}QueryDto queryDTO);
+
+    /**
+     * 分页查询
+     *
+     * @param id
+     * @return
+     */
+    Pager<${table.className}> page(${table.className}QueryDto queryDTO);
+
+}

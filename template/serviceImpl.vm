@@ -1,0 +1,59 @@
+package ${table.packageName}.service.impl;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import ${table.packageName}.service.${table.className}Service;
+import ${table.packageName}.model.entity.${table.className};
+import ${table.packageName}.model.query.${table.className}QueryDto;
+import ${table.packageName}.mappers.${table.className}Mapper;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+/**
+ * 业务逻辑处理类
+ *
+ * @author:${author}
+ * @date:${datetime}
+ */
+@Service
+public class ${table.className}ServiceImpl implements ${table.className}Service {
+
+	@Autowired
+	private ${table.className}Mapper ${table.classNameFirstLower}Mapper;
+
+    @Override
+    @ParamLog("新增")
+    public int insert(${table.className} ${table.classNameFirstLower}) {
+        return ${table.classNameFirstLower}Mapper.insert(${table.classNameFirstLower});
+    }
+
+    @Override
+    @ParamLog("修改")
+    public int update(${table.className} ${table.classNameFirstLower}) {
+        return ${table.classNameFirstLower}Mapper.update(${table.classNameFirstLower});
+    }
+
+	@Override
+    @ParamLog("根据ID查询")
+	public ${table.className} getById(Long id) {
+		return ${table.classNameFirstLower}Mapper.getById(id);
+	}
+
+    @Override
+    @ParamLog("列表查询")
+    public List<${table.className}> list(${table.className}QueryDto queryDTO) {
+		PageHelper.orderBy("create_time desc");
+		PageHelper.startPage(pageNo, pageSize, true);
+		return PagerUtils.pageToPager(${table.classNameFirstLower}Mapper.list(queryDto), pageNo, pageSize);
+	}
+
+    @Override
+    @ParamLog("分页查询")
+    public Page<${table.className}> list(${table.className}QueryDto queryDTO) {
+        PageHelper.orderBy("create_time desc");
+        return PageHelper.startPage(queryDTO.getPageIndex(), queryDTO.getPageSize())
+            .doSelectPage(() -> ${table.classNameFirstLower}Mapper.list(queryDTO));
+    }
+
+}

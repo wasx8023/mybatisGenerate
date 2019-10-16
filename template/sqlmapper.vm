@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="${table.packageName}.mappers.${table.className}Mapper">
+
+    <resultMap id="ResultMap" type="${table.packageName}.model.entity.${table.className}">
+    #foreach($tempColumn in $table.columnList)
+        #if(${tempColumn.fieldName}==${table.getFirstPrimaryKey().fieldName})
+
+            <id column="${tempColumn.columnName}" property="${tempColumn.fieldName}" jdbcType="${tempColumn.columnType}" />
+        #else<result column="${tempColumn.columnName}" property="${tempColumn.fieldName}" jdbcType="${tempColumn.columnType}" />
+        #end
+    #end
+    </resultMap>
+
+    <sql id="Base_Column_List">
+		#foreach( $tempColumn in $table.columnList)${tempColumn.columnName}#if($velocityCount!=$table.columnList.size()),#end#end
+    </sql>
+
+    <!-- 新增 -->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="${table.getFirstPrimaryKey().fieldName}" parameterType="${table.packageName}.model.entity.${table.className}">
+        insert into ${table.tableName} (
+            #foreach($tempColumn in $table.columnList)
+                #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
+                    ${tempColumn.columnName},
+                #end
+            #end
+        ) value (
+            #foreach($tempColumn in $table.columnList)
+                #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
+                    #{${tempColumn.fieldName}},
+                #end
+            #end
+        )
+    </insert>
+
+    <!-- 修改 -->
+    <update id="update" parameterType="${table.packageName}.model.entity.${table.className}">
+        update ${table.tableName}
+        <set>
+            #foreach($tempColumn in $table.columnList)
+                #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
+                    ${tempColumn.columnName} = #{${tempColumn.fieldName}},
+                #end
+            #end
+        </set>
+        where ${table.getFirstPrimaryKey().columnName} = #{${table.getFirstPrimaryKey().fieldName}}
+    </update>
+
+    <!-- 根据ID查询 -->
+    <select id="getById" parameterType="java.lang.Long" resultMap="ResultMap">
+        select
+            <include refid="Base_Column_List" />
+        from
+            ${table.tableName}
+        where
+            ${table.getFirstPrimaryKey().columnName} = #{${table.getFirstPrimaryKey().fieldName}}
+    </select>
+
+    <!-- 公共查询条件 -->
+    <sql id="whereSql">
+        <where>
+            <if test="@Ognl@isNotEmpty(beginCTime)"> and create_time &gt;= #{beginCTime} </if>
+            <if test="@Ognl@isNotEmpty(endCTime)"> and create_time &lt;= #{endCTime} </if>
+            #foreach($tempColumn in $table.columnList)
+                <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})"> and ${tempColumn.columnName} = #{${tempColumn.fieldName}} </if>
+            #end
+        </where>
+    </sql>
+
+    <!-- 查询列表 -->
+    <select id="list" resultMap="ResultMap">
+        select
+            <include refid="Base_Column_List" />
+        from
+            ${table.tableName}
+        <include refid="whereSql" />
+    </select>
+
+</mapper>

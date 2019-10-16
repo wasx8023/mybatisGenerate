@@ -1,0 +1,55 @@
+package com.control.situation.api.impl;
+
+import com.xubei.framework.common.entity.Pager;
+import com.xubei.framework.common.entity.ResponseObj;
+import com.xubei.framework.util.BeanUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RestController;
+
+/**
+ * 业务逻辑处理类
+ *
+ * @author:${author}
+ * @date:${datetime}
+ */
+@RestController
+public class ${table.className}ApiImpl implements ${table.className}Api {
+
+	@Autowired
+	private ${table.className}Service ${table.classNameFirstLower}Service;
+
+    /**
+     * 新增
+     */
+    @Override
+    public ResponseObj save(${table.className} ${table.classNameFirstLower}) {
+        ${table.classNameFirstLower}Service.insert(${table.classNameFirstLower});
+        return ResponseObj.SUCCESS();
+    }
+
+    /**
+     * 修改
+     */
+    @Override
+    public ResponseObj update(${table.className} ${table.classNameFirstLower}) {
+        ${table.classNameFirstLower}Service.update(${table.classNameFirstLower});
+        return ResponseObj.SUCCESS();
+    }
+
+    /**
+     * 根据ID查询
+     */
+    @Override
+    public ResponseObj<${table.className}> getById(Long id) {
+        return ResponseObj.SUCCESS(${table.classNameFirstLower}Service.getById(id));
+    }
+
+    /**
+     * 分页查询
+     */
+	@Override
+	public ResponseObj<Pager<${table.className}>> page(${table.className}QueryDTO queryDTO) {
+        return ResponseObj.SUCCESS(BeanUtils.copy(${table.classNameFirstLower}Service.page(queryDTO), ${table.className}.class));
+	}
+
+}
