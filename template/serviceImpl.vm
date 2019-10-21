@@ -4,7 +4,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import ${table.packageName}.service.${table.className}Service;
 import ${table.packageName}.model.entity.${table.className};
-import ${table.packageName}.model.query.${table.className}QueryDto;
+import ${table.packageName}.model.query.${table.className}QueryDTO;
 import ${table.packageName}.mappers.${table.className}Mapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,15 +42,13 @@ public class ${table.className}ServiceImpl implements ${table.className}Service 
 
     @Override
     @ParamLog("列表查询")
-    public List<${table.className}> list(${table.className}QueryDto queryDTO) {
-		PageHelper.orderBy("create_time desc");
-		PageHelper.startPage(pageNo, pageSize, true);
-		return PagerUtils.pageToPager(${table.classNameFirstLower}Mapper.list(queryDto), pageNo, pageSize);
+    public List<${table.className}> list(${table.className}QueryDTO queryDTO) {
+		return ${table.classNameFirstLower}Mapper.list(queryDto);
 	}
 
     @Override
     @ParamLog("分页查询")
-    public Page<${table.className}> list(${table.className}QueryDto queryDTO) {
+    public Page<${table.className}> page(${table.className}QueryDTO queryDTO) {
         PageHelper.orderBy("create_time desc");
         return PageHelper.startPage(queryDTO.getPageIndex(), queryDTO.getPageSize())
             .doSelectPage(() -> ${table.classNameFirstLower}Mapper.list(queryDTO));

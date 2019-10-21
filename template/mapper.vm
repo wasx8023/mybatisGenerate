@@ -19,18 +19,18 @@ public interface ${table.className}Mapper {
     /**
      * 新增
      *
-     * @param record
+     * @param ${table.classNameFirstLower}
      * @return
      */
-    int insert(${table.className} record);
+    int insert(${table.className} ${table.classNameFirstLower});
 
     /**
      * 修改
      *
-     * @param record
+     * @param ${table.classNameFirstLower}
      * @return
      */
-    int update(${table.className} record);
+    int update(${table.className} ${table.classNameFirstLower});
 
     /**
      * 根据ID查询
@@ -43,9 +43,9 @@ public interface ${table.className}Mapper {
     /**
      * 列表查询，支持分页
      *
-     * @param queryDto
+     * @param queryDTO
      * @return
      */
-	Page<${table.className}> list(${table.className}QueryDto queryDto);
+	Page<${table.className}> list(${table.className}QueryDTO queryDTO);
 
 }

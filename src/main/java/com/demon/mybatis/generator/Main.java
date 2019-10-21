@@ -17,7 +17,7 @@ public class Main {
                 "@GMchkkQsS8v",
                 "com.xubei.goods",
                 "songx",
-                "t_goods_error_rank",
+                "t_vip_present_game_account",
                 "G:/working/code"
         );
 
