@@ -41,7 +41,7 @@ public interface ${table.className}Service {
     /**
      * 列表查询
      *
-     * @param id
+     * @param queryDTO
      * @return
      */
     List<${table.className}> list(${table.className}QueryDTO queryDTO);
@@ -49,7 +49,7 @@ public interface ${table.className}Service {
     /**
      * 分页查询
      *
-     * @param id
+     * @param queryDTO
      * @return
      */
     Page<${table.className}> page(${table.className}QueryDTO queryDTO);

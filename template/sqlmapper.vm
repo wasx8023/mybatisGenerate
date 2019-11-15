@@ -3,14 +3,17 @@
 <mapper namespace="${table.packageName}.mappers.${table.className}Mapper">
 
     <resultMap id="ResultMap" type="${table.packageName}.model.entity.${table.className}">
-    #foreach($tempColumn in $table.columnList)
-    #if(${tempColumn.fieldName}==${table.getFirstPrimaryKey().fieldName})<id column="${tempColumn.columnName}" property="${tempColumn.fieldName}" jdbcType="${tempColumn.columnType}" />
-    #else<result column="${tempColumn.columnName}" property="${tempColumn.fieldName}" jdbcType="${tempColumn.columnType}" />
-    #end#end
+#foreach($tempColumn in $table.columnList)
+#if(${tempColumn.fieldName}==${table.getFirstPrimaryKey().fieldName})
+        <id column="${tempColumn.columnName}" property="${tempColumn.fieldName}" jdbcType="${tempColumn.columnType}" />
+#else
+        <result column="${tempColumn.columnName}" property="${tempColumn.fieldName}" jdbcType="${tempColumn.columnType}" />
+#end#end
     </resultMap>
 
     <sql id="Base_Column_List">
-        #foreach( $tempColumn in $table.columnList)${tempColumn.columnName}#if($velocityCount!=$table.columnList.size()), #end#end
+        #foreach( $tempColumn in $table.columnList)${tempColumn.columnName}#if($velocityCount!=$table.columnList.size()), #end
+        #end
     </sql>
 
     <!-- 新增 -->
@@ -31,10 +34,13 @@
         update ${table.tableName}
         <set>
         #foreach($tempColumn in $table.columnList)
-        #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.columnName} = #{${tempColumn.fieldName}},
-        #end#end
+        #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
+        ${tempColumn.columnName} = #{${tempColumn.fieldName}},
+        #end
+        #end
         </set>
-        where ${table.getFirstPrimaryKey().columnName} = #{${table.getFirstPrimaryKey().fieldName}}
+        where
+            ${table.getFirstPrimaryKey().columnName} = #{${table.getFirstPrimaryKey().fieldName}}
     </update>
 
     <!-- 根据ID查询 -->
@@ -56,6 +62,8 @@
             <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})"> and ${tempColumn.columnName} = #{${tempColumn.fieldName}} </if>
             #end
         </where>
+        <if test="@Ognl@isNotEmpty(orderBy)" > order by ${orderBy}</if>
+        <if test="@Ognl@isNotEmpty(limit)" > limit ${limit} </if>
     </sql>
 
     <!-- 查询列表 -->
