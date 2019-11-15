@@ -6,12 +6,15 @@ import com.xubei.framework.util.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RestController;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 业务逻辑处理类
  *
  * @author:${author}
  * @date:${datetime}
  */
+@Slf4j
 @RestController
 public class ${table.className}ApiImpl implements ${table.className}Api {
 
@@ -23,7 +26,12 @@ public class ${table.className}ApiImpl implements ${table.className}Api {
      */
     @Override
     public ResponseObj save(${table.className} ${table.classNameFirstLower}) {
-        ${table.classNameFirstLower}Service.insert(${table.classNameFirstLower});
+        try {
+            ${table.classNameFirstLower}Service.insert(${table.classNameFirstLower});
+        } catch (Exception e) {
+            log.error("新增失败：{}", e.getMessage(), e);
+            return ResponseObj.ERROR(e.getMessage());
+        }
         return ResponseObj.SUCCESS();
     }
 
@@ -32,7 +40,12 @@ public class ${table.className}ApiImpl implements ${table.className}Api {
      */
     @Override
     public ResponseObj update(${table.className} ${table.classNameFirstLower}) {
-        ${table.classNameFirstLower}Service.update(${table.classNameFirstLower});
+        try {
+            ${table.classNameFirstLower}Service.update(${table.classNameFirstLower});
+        } catch (Exception e) {
+            log.error("修改失败：{}", e.getMessage(), e);
+            return ResponseObj.ERROR(e.getMessage());
+        }
         return ResponseObj.SUCCESS();
     }
 

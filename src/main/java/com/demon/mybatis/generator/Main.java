@@ -17,7 +17,7 @@ public class Main {
                 "@GMchkkQsS8v",
                 "com.xubei.account.combinecoupon",
                 "songx",
-                "t_combine_coupon",
+                "t_combine_coupon_log",
                 "G:/working/code"
         );
 
