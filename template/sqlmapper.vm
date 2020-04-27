@@ -12,24 +12,18 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        #foreach( $tempColumn in $table.columnList)
-            ${tempColumn.columnName},
-        #end
+        #foreach( $tempColumn in $table.columnList)${tempColumn.columnName}, #end
     </sql>
 
     <!-- 新增 -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="${table.getFirstPrimaryKey().fieldName}" parameterType="${table.packageName}.model.entity.${table.className}">
         insert into ${table.tableName} (
         #foreach($tempColumn in $table.columnList)
-            #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
-                ${tempColumn.columnName},
-            #end
+            #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.columnName}, #end
         #end
         ) value (
         #foreach($tempColumn in $table.columnList)
-            #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
-                #{${tempColumn.fieldName}},
-            #end
+            #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})#{${tempColumn.fieldName}}, #end
         #end
         )
     </insert>
@@ -39,8 +33,7 @@
         update ${table.tableName}
         <set>
         #foreach($tempColumn in $table.columnList)
-            #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})
-                ${tempColumn.columnName} = #{${tempColumn.fieldName}},
+            #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.columnName} = #{${tempColumn.fieldName}},
             #end
         #end
         </set>

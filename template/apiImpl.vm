@@ -30,7 +30,7 @@ public class ${table.className}ApiImpl implements ${table.className}Api {
             ${table.classNameFirstLower}Service.insert(${table.classNameFirstLower});
         } catch (Exception e) {
             log.error("新增失败：{}", e.getMessage(), e);
-            return ResponseObj.ERROR(e.getMessage());
+            return ResponseObj.ERROR(e instanceof BizException ? e.getMessage() : "新增失败");
         }
         return ResponseObj.SUCCESS();
     }
@@ -44,7 +44,7 @@ public class ${table.className}ApiImpl implements ${table.className}Api {
             ${table.classNameFirstLower}Service.update(${table.classNameFirstLower});
         } catch (Exception e) {
             log.error("修改失败：{}", e.getMessage(), e);
-            return ResponseObj.ERROR(e.getMessage());
+            return ResponseObj.ERROR(e instanceof BizException ? e.getMessage() : "修改失败");
         }
         return ResponseObj.SUCCESS();
     }
@@ -54,7 +54,12 @@ public class ${table.className}ApiImpl implements ${table.className}Api {
      */
     @Override
     public ResponseObj<${table.className}> getById(Long id) {
-        return ResponseObj.SUCCESS(${table.classNameFirstLower}Service.getById(id));
+        try {
+            return ResponseObj.SUCCESS(${table.classNameFirstLower}Service.getById(id));
+        } catch (Exception e) {
+            log.error("查询信息失败：{}", e.getMessage(), e);
+            return ResponseObj.ERROR(e instanceof BizException ? e.getMessage() : "查询信息失败");
+        }
     }
 
     /**
@@ -62,7 +67,12 @@ public class ${table.className}ApiImpl implements ${table.className}Api {
      */
 	@Override
 	public ResponseObj<Pager<${table.className}>> page(${table.className}QueryDTO queryDTO) {
-        return ResponseObj.SUCCESS(BeanUtils.copy(${table.classNameFirstLower}Service.page(queryDTO), ${table.className}.class));
+        try {
+            return ResponseObj.SUCCESS(BeanUtils.copy(${table.classNameFirstLower}Service.page(queryDTO), ${table.className}.class));
+        } catch (Exception e) {
+            log.error("分页查询失败：{}", e.getMessage(), e);
+            return ResponseObj.ERROR(e instanceof BizException ? e.getMessage() : "分页查询失败");
+        }
 	}
 
 }
