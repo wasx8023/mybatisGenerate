@@ -15,9 +15,9 @@ public class Main {
                 "jdbc:mysql://rm-wz93c8s4anq404oc9.mysql.rds.aliyuncs.com:3306/xubei?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true",
                 "orders_api",
                 "@GMchkkQsS8v",
-                "com.xubei.account.combinecoupon",
+                "com.xubei.account.shopcoupon",
                 "songx",
-                "t_combine_coupon_log",
+                "t_activities_cost_total",
                 "G:/working/code"
         );
 
