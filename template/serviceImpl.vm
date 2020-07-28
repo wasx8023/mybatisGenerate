@@ -12,6 +12,8 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * 业务逻辑处理类
  *
@@ -19,10 +21,10 @@ import java.util.List;
  * @date:${datetime}
  */
 @Service
+@RequiredArgsConstructor
 public class ${table.className}ServiceImpl implements ${table.className}Service {
 
-	@Autowired
-	private ${table.className}Mapper ${table.classNameFirstLower}Mapper;
+	private final ${table.className}Mapper ${table.classNameFirstLower}Mapper;
 
     @Override
     @ParamLog("新增")
@@ -43,13 +45,13 @@ public class ${table.className}ServiceImpl implements ${table.className}Service 
 	}
 
     @Override
-    @ParamLog(description = "列表查询", isResult = false)
+    @ParamLog("列表查询")
     public List<${table.className}> list(${table.className}QueryDTO queryDTO) {
 		return ${table.classNameFirstLower}Mapper.list(queryDTO);
 	}
 
     @Override
-    @ParamLog(description = "分页查询", isResult = false)
+    @ParamLog("分页查询")
     public Page<${table.className}> page(${table.className}QueryDTO queryDTO) {
         PageHelper.orderBy("create_time desc");
         return PageHelper.startPage(queryDTO.getPageIndex(), queryDTO.getPageSize())

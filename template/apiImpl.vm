@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.extern.slf4j.Slf4j;
 
+import lombok.RequiredArgsConstructor;
+
 /**
  * 业务逻辑处理类
  *
@@ -16,10 +18,10 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 @RestController
+@RequiredArgsConstructor
 public class ${table.className}ApiImpl implements ${table.className}Api {
 
-	@Autowired
-	private ${table.className}Service ${table.classNameFirstLower}Service;
+	private final ${table.className}Service ${table.classNameFirstLower}Service;
 
     /**
      * 新增

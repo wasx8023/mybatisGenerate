@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="${table.packageName}.mappers.${table.className}Mapper">
+<mapper namespace="${table.packageName}.mapper.${table.className}Mapper">
 
     <resultMap id="ResultMap" type="${table.packageName}.model.entity.${table.className}">
 #foreach($tempColumn in $table.columnList)
@@ -12,17 +12,17 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        #foreach( $tempColumn in $table.columnList)${tempColumn.columnName}, #end
+        #foreach($tempColumn in $table.columnList)${tempColumn.columnName}, #end
     </sql>
 
     <!-- 新增 -->
     <insert id="insert" useGeneratedKeys="true" keyProperty="${table.getFirstPrimaryKey().fieldName}" parameterType="${table.packageName}.model.entity.${table.className}">
         insert into ${table.tableName} (
-        #foreach($tempColumn in $table.columnList)#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.columnName}, #end
-        #end
+            #foreach($tempColumn in $table.columnList)#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.columnName}, #end
+#end
         ) value (
-        #foreach($tempColumn in $table.columnList)#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})#{${tempColumn.fieldName}}, #end
-        #end
+            #foreach($tempColumn in $table.columnList)#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})#{${tempColumn.fieldName}}, #end
+#end
         )
     </insert>
 
@@ -30,11 +30,10 @@
     <update id="update" parameterType="${table.packageName}.model.entity.${table.className}">
         update ${table.tableName}
         <set>
-        #foreach($tempColumn in $table.columnList)
-            #if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.columnName} = #{${tempColumn.fieldName}},
+            #foreach($tempColumn in $table.columnList)#if(${tempColumn.fieldName}!=${table.getFirstPrimaryKey().fieldName})${tempColumn.columnName} = #{${tempColumn.fieldName}},
             #end
-        #end
-        </set>
+#end
+</set>
         where
             ${table.getFirstPrimaryKey().columnName} = #{${table.getFirstPrimaryKey().fieldName}}
     </update>
@@ -54,9 +53,9 @@
         <where>
             <if test="@Ognl@isNotEmpty(beginCTime)"> and create_time &gt;= #{beginCTime} </if>
             <if test="@Ognl@isNotEmpty(endCTime)"> and create_time &lt;= #{endCTime} </if>
-            #foreach($tempColumn in $table.columnList)
+#foreach($tempColumn in $table.columnList)
             <if test="@Ognl@isNotEmpty(${tempColumn.fieldName})"> and ${tempColumn.columnName} = #{${tempColumn.fieldName}} </if>
-            #end
+#end
         </where>
         <if test="@Ognl@isNotEmpty(orderBy)" > order by ${orderBy}</if>
         <if test="@Ognl@isNotEmpty(limit)" > limit ${limit} </if>
