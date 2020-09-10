@@ -42,7 +42,7 @@ public class ${table.className}ApiImpl implements ${table.className}Api {
             ${table.classNameFirstLower}Service.update(${table.classNameFirstLower});
         } catch (Exception e) {
             log.error("修改失败：{}", e.getMessage(), e);
-            ResponseObj.EXCEPTION(e, "修改失败");
+            return ResponseObj.EXCEPTION(e, "修改失败");
         }
         return ResponseObj.SUCCESS();
     }
