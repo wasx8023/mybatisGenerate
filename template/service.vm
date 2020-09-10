@@ -1,8 +1,6 @@
 package ${table.packageName}.service;
 
 import com.github.pagehelper.Page;
-import ${table.packageName}.model.query.${table.className}QueryDto;
-import ${table.packageName}.model.entity.${table.className};
 
 import java.util.List;
 
@@ -41,17 +39,17 @@ public interface ${table.className}Service {
     /**
      * 列表查询
      *
-     * @param queryDTO
+     * @param query
      * @return
      */
-    List<${table.className}> list(${table.className}QueryDTO queryDTO);
+    List<${table.className}> list(${table.className}Query query);
 
     /**
      * 分页查询
      *
-     * @param queryDTO
+     * @param query
      * @return
      */
-    Page<${table.className}> page(${table.className}QueryDTO queryDTO);
+    Page<${table.className}> page(${table.className}Query query);
 
 }

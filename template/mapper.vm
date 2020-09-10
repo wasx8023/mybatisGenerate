@@ -4,9 +4,6 @@ import com.github.pagehelper.Page;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Mapper;
 
-import ${table.packageName}.model.query.${table.className}QueryDto;
-import ${table.packageName}.model.entity.${table.className};
-
 /**
  * 数据库层
  *
@@ -43,9 +40,9 @@ public interface ${table.className}Mapper {
     /**
      * 列表查询，支持分页
      *
-     * @param queryDTO
+     * @param query
      * @return
      */
-	Page<${table.className}> list(${table.className}QueryDTO queryDTO);
+	Page<${table.className}> list(${table.className}Query query);
 
 }

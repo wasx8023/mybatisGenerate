@@ -23,57 +23,50 @@ public class ${table.className}ApiImpl implements ${table.className}Api {
 
 	private final ${table.className}Service ${table.classNameFirstLower}Service;
 
-    /**
-     * 新增
-     */
     @Override
+    @ParamLog("新增")
     public ResponseObj save(${table.className} ${table.classNameFirstLower}) {
         try {
             ${table.classNameFirstLower}Service.insert(${table.classNameFirstLower});
         } catch (Exception e) {
             log.error("新增失败：{}", e.getMessage(), e);
-            return ResponseObj.ERROR(e instanceof BizException ? e.getMessage() : "新增失败");
+            return ResponseObj.EXCEPTION(e, "新增失败");
         }
         return ResponseObj.SUCCESS();
     }
 
-    /**
-     * 修改
-     */
     @Override
+    @ParamLog("修改")
     public ResponseObj update(${table.className} ${table.classNameFirstLower}) {
         try {
             ${table.classNameFirstLower}Service.update(${table.classNameFirstLower});
         } catch (Exception e) {
             log.error("修改失败：{}", e.getMessage(), e);
-            return ResponseObj.ERROR(e instanceof BizException ? e.getMessage() : "修改失败");
+            ResponseObj.EXCEPTION(e, "修改失败");
         }
         return ResponseObj.SUCCESS();
     }
 
-    /**
-     * 根据ID查询
-     */
     @Override
+    @ParamLog("根据ID查询")
     public ResponseObj<${table.className}> getById(Long id) {
         try {
             return ResponseObj.SUCCESS(${table.classNameFirstLower}Service.getById(id));
         } catch (Exception e) {
             log.error("查询信息失败：{}", e.getMessage(), e);
-            return ResponseObj.ERROR(e instanceof BizException ? e.getMessage() : "查询信息失败");
+            return ResponseObj.EXCEPTION(e, "查询信息失败");
         }
     }
 
-    /**
-     * 分页查询
-     */
 	@Override
-	public ResponseObj<Pager<${table.className}>> page(${table.className}QueryDTO queryDTO) {
+    @ParamLog("分页查询")
+	public ResponseObj<Pager<${table.className}>> page(${table.className}Query query) {
         try {
-            return ResponseObj.SUCCESS(BeanUtils.copy(${table.classNameFirstLower}Service.page(queryDTO), ${table.className}.class));
+            return ResponseObj.SUCCESS(BeanUtils.copy(${table.classNameFirstLower}Service.page(query),
+                ${table.className}.class));
         } catch (Exception e) {
             log.error("分页查询失败：{}", e.getMessage(), e);
-            return ResponseObj.ERROR(e instanceof BizException ? e.getMessage() : "分页查询失败");
+            return ResponseObj.EXCEPTION(e, "分页查询失败");
         }
 	}
 

@@ -3,10 +3,6 @@ package ${table.packageName}.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.xubei.framework.boot.aspect.ParamLog;
-import ${table.packageName}.service.${table.className}Service;
-import ${table.packageName}.model.entity.${table.className};
-import ${table.packageName}.model.query.${table.className}QueryDTO;
-import ${table.packageName}.mappers.${table.className}Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,16 +42,16 @@ public class ${table.className}ServiceImpl implements ${table.className}Service 
 
     @Override
     @ParamLog("列表查询")
-    public List<${table.className}> list(${table.className}QueryDTO queryDTO) {
-		return ${table.classNameFirstLower}Mapper.list(queryDTO);
+    public List<${table.className}> list(${table.className}Query query) {
+		return ${table.classNameFirstLower}Mapper.list(query);
 	}
 
     @Override
     @ParamLog("分页查询")
-    public Page<${table.className}> page(${table.className}QueryDTO queryDTO) {
+    public Page<${table.className}> page(${table.className}Query query) {
         PageHelper.orderBy("create_time desc");
-        return PageHelper.startPage(queryDTO.getPageIndex(), queryDTO.getPageSize())
-                .doSelectPage(() -> ${table.classNameFirstLower}Mapper.list(queryDTO));
+        return PageHelper.startPage(query.getPageIndex(), query.getPageSize())
+                .doSelectPage(() -> ${table.classNameFirstLower}Mapper.list(query));
     }
 
 }

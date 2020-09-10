@@ -12,13 +12,15 @@ public class Main {
         MybatisCodeGenerator mybatisCode = new MybatisCodeGenerator();
         mybatisCode.generator(
                 "com.mysql.jdbc.Driver",
-//                "jdbc:mysql://rm-wz93c8s4anq404oc9.mysql.rds.aliyuncs.com:3306/xubei?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true",
-		        "jdbc:mysql://localhost:3306/jeesite?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true",
-                "root",
-                "123456",
-                "com.me.usercenter",
+                "jdbc:mysql://rm-wz93c8s4anq404oc9.mysql.rds.aliyuncs.com:3306/xubei?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true",
+//		        "jdbc:mysql://localhost:3306/jeesite?useUnicode=true&amp;characterEncoding=UTF-8&amp;allowMultiQueries=true",
+//                "root",
+		        "orders_api",
+//                "123456",
+		        "@GMchkkQsS8v",
+                "com.xubei.channel",
                 "songx",
-                "t_user_role",
+                "t_video_vip_type",
                 "G:/xubei/code"
         );
 

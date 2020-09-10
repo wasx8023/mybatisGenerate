@@ -20,7 +20,7 @@ import lombok.ToString;
 @Setter
 @NoArgsConstructor
 @ToString(callSuper = true)
-public class ${table.className}QueryDTO extends BaseQueryDTO {
+public class ${table.className}Query extends BaseQueryDTO {
 
 	private static final long serialVersionUID = -1L;
 

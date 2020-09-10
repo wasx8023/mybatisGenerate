@@ -27,8 +27,8 @@ public interface ${table.className}Api {
      * @return
      */
     @ApiOperation(value = "新增")
-    @RequestMapping(value = ApiGateConstants.PATH_INNER + "/${table.classNameFirstLower}/save", method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = ApiGateConstants.PATH_INNER + "/${table.classNameFirstLower}/save",
+            method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseObj save(@RequestBody ${table.className} ${table.classNameFirstLower});
 
     /**
@@ -38,8 +38,8 @@ public interface ${table.className}Api {
      * @return
      */
     @ApiOperation(value = "修改")
-    @RequestMapping(value = ApiGateConstants.PATH_INNER + "/${table.classNameFirstLower}/update", method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = ApiGateConstants.PATH_INNER + "/${table.classNameFirstLower}/update",
+            method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     ResponseObj update(@RequestBody ${table.className} ${table.classNameFirstLower});
 
     /**
@@ -49,18 +49,19 @@ public interface ${table.className}Api {
      * @return
      */
     @ApiOperation(value = "根据ID查询")
-    @RequestMapping(value = ApiGateConstants.PATH_INNER + "/${table.classNameFirstLower}/getById", method = RequestMethod.GET)
+    @RequestMapping(value = ApiGateConstants.PATH_INNER + "/${table.classNameFirstLower}/getById",
+            method = RequestMethod.GET)
     ResponseObj<${table.className}> getById(@RequestParam("id") Long id);
 
     /**
      * 分页查询
      *
-     * @param queryDTO
+     * @param query
      * @return
      */
     @ApiOperation(value = "分页查询")
-    @RequestMapping(value = ApiGateConstants.PATH_INNER + "/${table.classNameFirstLower}/page", method = RequestMethod.POST,
-            consumes = MediaType.APPLICATION_JSON_VALUE)
-    ResponseObj<Pager<${table.className}>> page(@RequestBody ${table.className}QueryDTO queryDTO);
+    @RequestMapping(value = ApiGateConstants.PATH_INNER + "/${table.classNameFirstLower}/page",
+            method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    ResponseObj<Pager<${table.className}>> page(@RequestBody ${table.className}Query query);
 
 }
