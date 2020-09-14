@@ -24,14 +24,14 @@ public class ${table.className}ServiceImpl implements ${table.className}Service 
 
     @Override
     @ParamLog("新增")
-    public int insert(${table.className} ${table.classNameFirstLower}) {
-        return ${table.classNameFirstLower}Mapper.insert(${table.classNameFirstLower});
+    public void insert(${table.className} ${table.classNameFirstLower}) {
+        ${table.classNameFirstLower}Mapper.insert(${table.classNameFirstLower});
     }
 
     @Override
     @ParamLog("修改")
-    public int update(${table.className} ${table.classNameFirstLower}) {
-        return ${table.classNameFirstLower}Mapper.update(${table.classNameFirstLower});
+    public void update(${table.className} ${table.classNameFirstLower}) {
+        ${table.classNameFirstLower}Mapper.update(${table.classNameFirstLower});
     }
 
 	@Override

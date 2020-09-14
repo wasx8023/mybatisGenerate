@@ -20,7 +20,7 @@ public class Main {
 		        "@GMchkkQsS8v",
                 "com.xubei.channel",
                 "songx",
-                "t_video_vip_type",
+                "t_video_recharge_log",
                 "G:/xubei/code"
         );
 
